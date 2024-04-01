@@ -58,6 +58,7 @@
 		98A2FBCF2B7A8A3B002D7251 /* LottiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A2FBCE2B7A8A3B002D7251 /* LottiView.swift */; };
 		98B07B8E2B7EAE9D00D4C514 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B07B8D2B7EAE9D00D4C514 /* PrivacyPolicyView.swift */; };
 		98B07B902B7EAEAC00D4C514 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B07B8F2B7EAEAC00D4C514 /* TermsView.swift */; };
+		98B9989F2BB9666400676A49 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 98B9989E2BB9666400676A49 /* Shimmer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 				98920D042BA9F12500E63432 /* Moya in Frameworks */,
 				98920D082BA9F12500E63432 /* RxMoya in Frameworks */,
 				98A2FBCB2B7A89B7002D7251 /* Lottie in Frameworks */,
+				98B9989F2BB9666400676A49 /* Shimmer in Frameworks */,
 				98920D062BA9F12500E63432 /* ReactiveMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				987D95202B729C9F00FC3581 /* NotificationsView.swift */,
-				987D95022B724FE700FC3581 /* ContentView.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -311,15 +312,15 @@
 		987D94FF2B724FE700FC3581 /* ZsozeApp */ = {
 			isa = PBXGroup;
 			children = (
-				98920D0C2BAA143200E63432 /* Utils */,
-				9853F60D2BA04B9400597CE1 /* Model */,
 				9853F6062B9F85D700597CE1 /* Info.plist */,
+				983BC6142B756F60009CA3DC /* CustomView.swift */,
+				987D95042B724FE800FC3581 /* Assets.xcassets */,
+				987D951A2B7290A400FC3581 /* App */,
+				9853F60D2BA04B9400597CE1 /* Model */,
+				987D95062B724FE800FC3581 /* Preview Content */,
+				98920D0C2BAA143200E63432 /* Utils */,
 				980710762B80A45800D76032 /* ViewModels */,
 				987D951B2B7290B300FC3581 /* Views */,
-				987D951A2B7290A400FC3581 /* App */,
-				987D95042B724FE800FC3581 /* Assets.xcassets */,
-				987D95062B724FE800FC3581 /* Preview Content */,
-				983BC6142B756F60009CA3DC /* CustomView.swift */,
 			);
 			path = ZsozeApp;
 			sourceTree = "<group>";
@@ -336,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				987D95002B724FE700FC3581 /* ZsozeAppApp.swift */,
+				987D95022B724FE700FC3581 /* ContentView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -512,6 +514,7 @@
 				98920D032BA9F12500E63432 /* Moya */,
 				98920D052BA9F12500E63432 /* ReactiveMoya */,
 				98920D072BA9F12500E63432 /* RxMoya */,
+				98B9989E2BB9666400676A49 /* Shimmer */,
 			);
 			productName = ZsozeApp;
 			productReference = 987D94FD2B724FE700FC3581 /* ZsozeApp.app */;
@@ -549,6 +552,7 @@
 				98A2FBC92B7A89B7002D7251 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				9853F5FB2B9F4CF900597CE1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				98920D002BA9F12500E63432 /* XCRemoteSwiftPackageReference "Moya" */,
+				98B9989D2BB9666400676A49 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			productRefGroup = 987D94FE2B724FE700FC3581 /* Products */;
 			projectDirPath = "";
@@ -932,6 +936,14 @@
 				minimumVersion = 4.4.0;
 			};
 		};
+		98B9989D2BB9666400676A49 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -964,6 +976,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98A2FBC92B7A89B7002D7251 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		98B9989E2BB9666400676A49 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98B9989D2BB9666400676A49 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

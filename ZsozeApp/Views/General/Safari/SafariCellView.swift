@@ -6,19 +6,31 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import Shimmer
 
 struct SafariCellView: View {
     let post: Item
+    @State private var isLoading = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 2){
             VStack(alignment: .center){
-                WebImage(url: URL(string: post.snippet.thumbnails.high.url))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 210)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                AsyncImage(url: URL(string: post.snippet.thumbnails.high.url)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width - 32, height: 220)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .task {
+                            isLoading = true
+                        }
+                } placeholder: {
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(.gray)
+                        .redacted(reason: .placeholder)
+                        .shimmering()
+                        .frame(width: UIScreen.main.bounds.width - 32, height: 220)
+                }
             }
             .frame(width: 370)
             
@@ -47,6 +59,8 @@ struct SafariCellView: View {
                 .padding(.horizontal)
                 .font(.subheadline)
         }
+        .redacted(reason: isLoading ? [] : .placeholder)
+        .shimmering(active: isLoading ? false : true)
         .padding()
         .frame(width: UIScreen.main.bounds.width - 32, height: 370)
         .background(

@@ -25,20 +25,13 @@ class ApiService: ObservableObject {
     @Published var zsunBoxingChannel: [Item] = []
     
     
-   
-    
     let provider = MoyaProvider<ApiServiceTargetType>()
     
-    init() {
-//        getZsozeChannel()
-//        getVodChannel()
-//        getShortChannel()
-//        getArtChannel()
-//        getZsunBoxingChannel()
-    }
-    
+  
     func getZsozeChannel() {
         isLoading = true
+        defer { isLoading = false}
+        
         provider.requestPublisher(.zsoze(apiKey: apiKey, channelId: mainChannelId))
             .tryMap { response in
                 guard let httpResponse = response.response else {
@@ -63,6 +56,8 @@ class ApiService: ObservableObject {
     
     func getVodChannel() {
         isLoading = true
+        defer { isLoading = false}
+
         provider.requestPublisher(.vod(apiKey: apiKey, channelId: vodChannelId))
             .tryMap { response in
                 guard let httpResponse = response.response else {
@@ -86,6 +81,8 @@ class ApiService: ObservableObject {
     
     func getShortChannel() {
         isLoading = true
+        defer { isLoading = false}
+
         provider.requestPublisher(.shorts(apiKey: apiKey, channelId: shortsChannelId))
             .tryMap { response in
                 guard let httpResponse = response.response else {
@@ -108,6 +105,8 @@ class ApiService: ObservableObject {
     
     func getArtChannel() {
         isLoading = true
+        defer { isLoading = false}
+
         provider.requestPublisher(.arts(apiKey: apiKey, channelId: artChannelId))
             .tryMap { response in
                 guard let httpResponse = response.response else {
@@ -130,6 +129,7 @@ class ApiService: ObservableObject {
     
     func getZsunBoxingChannel() {
         isLoading = true
+        defer { isLoading = false}
         provider.requestPublisher(.zsunboxing(apiKey: apiKey, channelId: zsunboxingChannelId))
             .tryMap { response in
                 guard let httpResponse = response.response else {
@@ -172,7 +172,7 @@ extension ApiService {
     }
     
     private func handleFailure(_ error: Error) {
-        isLoading = false
+       // isLoading = false
         hasError = true
         self.error = ErrorCases.custom(error)
     }
@@ -195,7 +195,7 @@ extension ApiService {
         
         targetChannel = data.items
         
-        isLoading = false
+       // isLoading = false
         hasError = false
     }
 }

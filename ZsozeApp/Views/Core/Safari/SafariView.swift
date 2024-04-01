@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct SafariView: View {
+    @State private var hideTheContent = false
     @StateObject var viewModel = ApiService()
     @EnvironmentObject var channelSelection: ChannelSelection
     
@@ -37,23 +39,36 @@ struct SafariView: View {
                     TopScrollView(selectedChannel: $channelSelection.selectedChannels)
                         .padding(.all)
                     
+                    ContentUnavailableView.search
+                        .opacity(viewModel.hasError ? 1 : 0)
+                    
                 }
+                
                 ScrollView(.vertical, showsIndicators: false){
-                    if viewModel.isLoading {
-                        ProgressView()
-                    } else {
-                        ForEach(filteredPosts(), id: \.snippet.title){ post in
-                            SafariCellView(post: post)
-                        }
+                    ProgressView()
+                        .opacity(viewModel.isLoading ? 1 : 0)
+                    
+                    ForEach(filteredPosts(), id: \.snippet.title){ post in
+                        SafariCellView(post: post)
+                        
                     }
                 }
+                .padding(.top, 130)
                 .alert(isPresented: $viewModel.hasError, content: {
                     Alert(title: Text("Error!"), message: Text(viewModel.error?.description ?? "Unknown error!"), primaryButton: .default(Text("Retry"), action: {
                         viewModel.getZsozeChannel()
                     }), secondaryButton: .cancel())
                 })
-                .scrollIndicators(.never)
-                .padding(.top, 130)
+            }
+        }
+        .onAppear{
+            Task{
+                // try await Task.sleep(nanoseconds: 3_000_000_000)
+                viewModel.getZsozeChannel()
+                viewModel.getVodChannel()
+                viewModel.getShortChannel()
+                viewModel.getArtChannel()
+                 viewModel.getZsunBoxingChannel()
             }
         }
     }
@@ -83,6 +98,7 @@ struct SafariView: View {
         return filteredPosts
     }
 }
+
 
 #Preview {
     SafariView()
